@@ -37,13 +37,13 @@ const createDom = lang => {
    wrap.append(displayFlipp, keyBoardWrap)
 
 
-   for (var i = 0; i < keycapsArr.length; i++) {
-      var line = document.createElement('div')
+   for (let i = 0; i < keycapsArr.length; i++) {
+      let line = document.createElement('div')
       line.className = `line-${i + 1}`
       keyBoard.appendChild(line)
 
       keycapsArr[i].map(elem => {
-         var keyCap = document.createElement('div')
+         let keyCap = document.createElement('div')
          const paragraph = document.createElement('p')
          keyCap.className = 'keycap'
          keyCap.classList.add(elem.code)
