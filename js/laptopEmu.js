@@ -22,8 +22,5 @@ export const laptopEmulator = () => {
          }, 2500)
       }
 
-      /*	document.querySelectorAll('.keycap').forEach(elem => {
-            elem.classList.add('active')
-         })*/
    })
 }

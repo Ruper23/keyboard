@@ -27,7 +27,7 @@ const logic = () => {
 
          document.querySelector('.reloading').classList.remove('active')
       }, 2100)
-      for (var i = 0; i < keyCapBtn.length; i++) {
+      for (let i = 0; i < keyCapBtn.length; i++) {
          keyCapBtn[i].classList.toggle('powered')
       }
       if (document.querySelector('.power-btn').classList.contains('active') !== true) {
@@ -84,10 +84,10 @@ const logic = () => {
 
    /* Keyboard Events */
    document.addEventListener('keydown', e => {
-      var arrayItem = keycapsArr.flatMap((array) => array).find((item) => item.keyCode == e.keyCode)
+      let arrayItem = keycapsArr.flatMap((array) => array).find((item) => item.keyCode == e.keyCode)
       e.preventDefault()
       e.stopPropagation()
-      var btnPressed = document.querySelector(`[data-key="${e.keyCode}"]`)
+      let btnPressed = document.querySelector(`[data-key="${e.keyCode}"]`)
       btnPressed.classList.add('active')
       textAreaInput.focus()
       /* Lang switch */
@@ -134,7 +134,7 @@ const logic = () => {
    })
 
    document.addEventListener('keyup', e => {
-      var btnPressed = document.querySelector(`[data-key="${e.keyCode}"]`)
+      let btnPressed = document.querySelector(`[data-key="${e.keyCode}"]`)
       btnPressed.classList.remove('active')
       textAreaInput.focus()
       textAreaInput.selectionStart = textAreaInput.selectionEnd = textAreaInput.value.length;
