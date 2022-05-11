@@ -1,11 +1,26 @@
 import createDom from "./keyboardDOM.js"
 import keycapsArr from "./keyData/keyData.js"
 import { changeLang } from "./changeLang.js"
+const langs = ['en', 'ru']
+let lang = langs[0]
 
+
+/* LocalStorage */
+function setLocalStorage() {
+   localStorage.setItem('lang', lang);
+}
+window.addEventListener('beforeunload', setLocalStorage);
+function getLocalStorage() {
+   if (localStorage.getItem('lang')) {
+      lang = localStorage.getItem('lang');
+   }
+}
+window.addEventListener('load', getLocalStorage);
+
+/* keyboard Logic */
 const logic = () => {
-   const langs = ['en', 'ru']
-   let lang = langs[0]
    createDom(lang)
+
    const board = document.querySelector('.keyboard')
    const textAreaInput = document.querySelector('textarea')
 
@@ -96,6 +111,7 @@ const logic = () => {
          index++
          lang = langs[index % langs.length]
          changeLang(lang)
+         // document.querySelector('.lang').value = lang
       }
       /*backspace func */
       if (e.keyCode == 8) {
@@ -145,6 +161,9 @@ const logic = () => {
       textAreaInput.textContent = delLastChar
       textAreaInput.selectionStart = textAreaInput.selectionEnd = textAreaInput.value.length;
    })
+
+
+
 }
 
 export default logic
