@@ -1,0 +1,346 @@
+@font-face {
+   font-family: "Razer";
+   src: url("font/razer.ttf");
+}
+html,
+body {
+   width: 100%;
+   height: 100%;
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+.wrap {
+   width: 100%;
+   height: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   background: #333;
+   perspective: 1000;
+}
+.wrap:before {
+   content: "open & launch laptop for start";
+   position: absolute;
+   width: 80%;
+   height: 20%;
+   top: 15%;
+   font-family: "Razer";
+   line-height: 1em;
+   text-align: center;
+   color: #a2be9623;
+   font-size: clamp(40px, 100%, 70px);
+}
+.wrap:after {
+   content: "keybord for windows.  language switch press shift + alt";
+   position: absolute;
+   width: 80%;
+   height: 20%;
+   top: 25%;
+   font-family: "Razer";
+   line-height: 1em;
+   text-align: center;
+   color: #a2be9623;
+   font-size: clamp(30px, 100%, 50px);
+}
+.display-flipp {
+   transition: 0.6s ease;
+   transform-style: preserve-3d;
+   position: relative;
+   width: 700px;
+   height: 344px;
+   z-index: 23;
+   top: 344px;
+}
+.display-flipp.active {
+   transform: rotateX(180deg);
+   top: 0;
+}
+.display {
+   width: 696px;
+   height: 344px;
+   background: rgb(73, 73, 73);
+   background: linear-gradient(90deg, rgba(73, 73, 73, 1) 0%, rgba(80, 79, 78, 1) 12%, rgba(13, 11, 7, 1) 67%);
+   border-radius: 15px 15px 5px 5px;
+   border: 2px solid green;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: relative;
+   transform: rotateX(180deg);
+   transform-style: preserve-3d;
+   z-index: 22;
+}
+
+.back,
+.display {
+   backface-visibility: hidden;
+   position: absolute;
+   left: 0;
+}
+.back {
+   width: 696px;
+   height: 344px;
+   z-index: 2;
+   background: rgb(73, 73, 73);
+   background: linear-gradient(121deg, rgba(73, 73, 73, 1) 0%, rgba(80, 79, 78, 1) 7%, rgba(13, 11, 7, 1) 67%);
+   border: 2px solid green;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 5px 5px 15px 15px;
+}
+.back img {
+   width: 100px;
+   height: 100px;
+   cursor: pointer;
+}
+.display:before {
+   content: "";
+   position: absolute;
+   top: 4px;
+   left: 50%;
+   transform: translateX(-50%);
+   width: 13px;
+   height: 13px;
+   border-radius: 50%;
+   background: rgba(255, 255, 255, 0.1);
+   border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.display:after {
+   content: "";
+   position: absolute;
+   top: 7px;
+   left: 50%;
+   transform: translateX(-90%);
+   width: 3px;
+   height: 3px;
+   border-radius: 50%;
+   background: rgba(255, 255, 255, 0.2);
+}
+.reloading {
+   position: absolute;
+   left: 315px;
+   top: 40%;
+   width: 70px;
+   height: 70px;
+   border-radius: 50%;
+   background: transparent;
+   border-top: 3px dotted #fafafa;
+   z-index: 2;
+   display: none;
+}
+@keyframes rotate {
+   0% {
+      transform: rotate(0deg);
+   }
+   100% {
+      transform: rotate(720deg);
+   }
+}
+.reloading.active {
+   display: block;
+   animation: rotate 2s infinite;
+}
+.keyboard-wrap {
+   position: relative;
+}
+.keyboard {
+   width: 696px;
+   border: 2px solid green;
+   background: rgb(40, 40, 40);
+   background: linear-gradient(0deg, rgba(40, 40, 40, 1) 0%, rgba(13, 11, 7, 1) 11%);
+   display: flex;
+   flex-direction: column;
+   position: relative;
+   overflow: hidden;
+   align-items: center;
+   justify-content: center;
+   border-radius: 7px 7px 15px 15px;
+   box-shadow: 5px 5px 17px 1px #000000;
+}
+.power-btn {
+   position: absolute;
+   right: 40px;
+   top: 10px;
+   width: 35px;
+   height: 7px;
+   z-index: 1;
+   border-radius: 2px;
+   background: #555;
+   cursor: pointer;
+   box-shadow: 0 0 3px 1px green;
+}
+.power-btn:before {
+   content: "";
+   top: 1px;
+   left: 2px;
+   width: 10px;
+   height: 5px;
+   background: #111;
+   position: absolute;
+   border-radius: 2px;
+}
+.power-btn.active:before {
+   content: "";
+   top: 1px;
+   left: 2px;
+   width: 10px;
+   height: 5px;
+   background: #49f101;
+   position: absolute;
+   border-radius: 2px;
+}
+.textarea {
+   width: 660px;
+   height: 240px;
+   margin: 10px 0;
+   background: #333;
+   color: #49f101;
+   border-radius: 5px;
+   visibility: hidden;
+   opacity: 0;
+   transition: 0.3s ease all;
+}
+.textarea.active {
+   transition-delay: 2s;
+   visibility: visible;
+   opacity: 1;
+}
+.display.off {
+   background: url("img/unknown.jpg") 0 0 / cover no-repeat,
+      linear-gradient(0deg, rgba(40, 40, 40, 1) 0%, rgba(13, 11, 7, 1) 67%);
+   background-blend-mode: overlay;
+}
+
+textarea {
+   outline: none;
+   font-size: 16px;
+}
+
+.line-1,
+.line-2,
+.line-3,
+.line-4,
+.line-5,
+.line-6 {
+   display: flex;
+}
+.line-1 {
+   margin: 30px 0 0px 0;
+   align-items: flex-end;
+}
+.logo-line {
+   margin: 15px 0;
+   width: 100%;
+   position: relative;
+}
+.logo-line:before {
+   content: "";
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 2px;
+   background: #333;
+   z-index: 2;
+}
+.keycap {
+   width: 30px;
+   height: 30px;
+   margin: 1px;
+   border-radius: 5px;
+   padding: 5px;
+   position: relative;
+   box-shadow: 0 0 1px 1px #111;
+   position: relative;
+   z-index: 1;
+   font-size: 15px;
+   cursor: pointer;
+   transition: all 0.1s ease;
+   font-family: "Razer", sans-serif;
+   color: #111;
+   border: 1px solid #111;
+}
+.keycap.powered {
+   box-shadow: 0 0 7px 1px green;
+   color: green;
+   border: 1px solid green;
+   transition: all 0.3s ease;
+}
+.keycap:hover {
+   background: rgba(139, 146, 137, 0.712);
+}
+.keycap.active {
+   transform: scale(0.95);
+   background: rgba(212, 250, 204, 0.712);
+   color: #000;
+}
+.keycap p {
+   pointer-events: none;
+   padding: 0;
+   margin: 5px 0 0 0px;
+}
+
+.space {
+   width: calc(30px * 8);
+}
+.lshift,
+.enter {
+   width: calc(30px * 3);
+}
+.backspace {
+   width: calc(30px * 2.9);
+}
+.capslock {
+   width: calc(30px * 2.3);
+   position: relative;
+}
+.ctrl,
+.alt {
+   width: calc(30px * 1.25);
+}
+.shift,
+.lctrl {
+   width: calc(30px * 1.7);
+}
+.tab {
+   width: calc(30px * 1.5);
+}
+.capslock:before {
+   content: "";
+   width: 10px;
+   height: 10px;
+   border-radius: 50%;
+   border: 1px solid #333;
+   right: 10px;
+   top: 50%;
+   position: absolute;
+   transform: translateY(-50%);
+}
+.capslock.on {
+   position: relative;
+}
+.capslock.on:before {
+   content: "";
+   width: 10px;
+   height: 10px;
+   border-radius: 50%;
+   border: 1px solid #333;
+   background: #49f101;
+   box-shadow: 0 0 3px 1px #49f101;
+   right: 10px;
+   top: 50%;
+   position: absolute;
+   transform: translateY(-50%);
+}
+
+.logo {
+   width: 50px;
+   height: 50px;
+   background: url("img/logo.png") 0 0 / cover no-repeat;
+   position: relative;
+   z-index: 2;
+   margin: 10px auto 0;
+}
